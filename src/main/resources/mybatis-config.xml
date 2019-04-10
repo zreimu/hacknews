@@ -16,7 +16,9 @@
          as some drivers deny compatibility but still work -->
         <setting name="useGeneratedKeys" value="true"/>
     </settings>
-
+    <typeAliases>
+        <package name="com.cskaoyan.hackernews.model"/>
+    </typeAliases>
     <!-- Continue going here -->
 
 </configuration>

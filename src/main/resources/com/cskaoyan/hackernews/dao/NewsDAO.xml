@@ -17,4 +17,12 @@
         ORDER BY id DESC
         LIMIT #{offset},#{limit}
     </select>
+    <insert id="addUser" parameterType="user">
+        insert into user_news_t (username,password)
+        value(#{user.username},#{user.password});
+    </insert>
+    <select id="selectByUsername" resultType="user">
+        select username,password
+              from user_news_t where username=#{user.username}
+    </select>
 </mapper>
