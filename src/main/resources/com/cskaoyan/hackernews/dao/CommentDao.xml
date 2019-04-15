@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cskaoyan.hackernews.dao.CommentDao">
+  <select id="selectComments" resultType="comment">
+    select comment.*
+          FROM comment where entity_id=#{id} order by created_date desc
+
+  </select>
+    <insert id="addComment">
+        insert into comment(content,user_id,entity_id,entity_type,created_date,status)
+        values(#{content},#{userId},#{entityId},#{entityType},#{createdDate},#{status})
+    </insert>
+
+</mapper>

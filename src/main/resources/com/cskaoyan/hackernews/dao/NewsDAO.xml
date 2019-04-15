@@ -17,12 +17,14 @@
         ORDER BY id DESC
         LIMIT #{offset},#{limit}
     </select>
-    <insert id="addUser" parameterType="user">
-        insert into user_news_t (username,password)
-        value(#{user.username},#{user.password});
-    </insert>
-    <select id="selectByUsername" resultType="user">
-        select username,password
-              from user_news_t where username=#{user.username}
+    <select id="selectNewsinfoByid"  resultType="news" >
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table"/>
+        where news.id=#{id}
     </select>
+    <update id="updataCommentCount">
+        update news set comment_count=comment_count+1 where id = #{id}
+    </update>
 </mapper>

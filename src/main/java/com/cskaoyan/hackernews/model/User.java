@@ -1,15 +1,29 @@
 package com.cskaoyan.hackernews.model;
 
-public class User {
-    private  String username;
-    private  String password;
 
-    public String getUsername() {
-        return username;
+public class User {
+    private int id;
+    private String name;
+    private String password;
+    private String salt;
+    private String headUrl;
+
+    public User() {
+
+    }
+    public User(String name) {
+        this.name = name;
+        this.password = "";
+        this.salt = "";
+        this.headUrl = "";
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
@@ -20,11 +34,27 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getHeadUrl() {
+        return headUrl;
+    }
+
+    public void setHeadUrl(String headUrl) {
+        this.headUrl = headUrl;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
