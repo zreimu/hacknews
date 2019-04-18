@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import redis.clients.jedis.Jedis;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +31,6 @@ public class hackcontorller {
         String contextPath = request.getContextPath();
         session.setAttribute("contextPath", contextPath);
         List<Vos> newsList = hacknewsService.selectAllNews();
-        System.out.println("--------------");
         session.setAttribute("vos",newsList);
         return "home";
     }
@@ -130,6 +130,7 @@ public class hackcontorller {
         /*session.setAttribute("user",user);*/
         model.addAttribute("news",news1);
         model.addAttribute("owner",user);
+        model.addAttribute("like",0);
         model.addAttribute("comments",comment);
         return "detail";
     }
@@ -167,7 +168,7 @@ public class hackcontorller {
             comment.setCreatedDate(created_date);
             System.out.println(new Date());
             hacknewsService.addComment(comment);
-            hacknewsService.updataCommentCount(id);
+            hacknewsService.updateCommentCount(id);
             model.addAttribute("owner",user1);
             model.addAttribute("news",news1);
             List<CommentVo> comments=hacknewsService.selectComments(id);
@@ -177,13 +178,46 @@ public class hackcontorller {
 
         return "detail";
     }
-
+    @RequestMapping("like")
+    @ResponseBody
+    public Map like(String newsId,HttpSession session,HttpServletRequest request){
+        HashMap map=new HashMap();
+        User user = (User)session.getAttribute("user");
+        int id = user.getId();
+        if(id==0){
+            map.put("code",1);
+            map.put("msg","登录后才能评价");
+            return map;
+        }else {
+            String i = hacknewsService.like(id, newsId);
+            map.put("code", 0);
+            map.put("msg", i);
+            return map;
+        }
+    }
+    @RequestMapping("dislike")
+    @ResponseBody
+    public Map dislike(String newsId,HttpSession session,HttpServletRequest request) {
+        HashMap map=new HashMap();
+        User user = (User)session.getAttribute("user");
+        int id = user.getId();
+        String i =hacknewsService.dislike(id,newsId);
+        if(id==0){
+            map.put("code",1);
+            map.put("msg","登录后才能评价");
+            return  map;
+        }else {
+            map.put("code", 0);
+            map.put("msg", i);
+            return map;
+        }
+    }
     @RequestMapping("/test")
     @ResponseBody
-    public User test(){
-         User user= hacknewsService.selectUserinfo("111");
+    public List <Vos> test(){
+         List<Vos> vos=hacknewsService.selectAllNews();
 
-        return user;
+        return vos;
     }
     }
 

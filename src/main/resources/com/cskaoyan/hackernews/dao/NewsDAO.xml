@@ -24,7 +24,16 @@
         <include refid="table"/>
         where news.id=#{id}
     </select>
-    <update id="updataCommentCount">
+    <update id="updateCommentCount">
         update news set comment_count=comment_count+1 where id = #{id}
     </update>
+    <update id="updateLikeCount">
+        update news set like_count=like_count+1 where id = #{newsId}
+    </update>
+    <update id="updateDisLikeCount">
+        update news set like_count=like_count-1 where id = #{newsId}
+    </update>
+    <select id="selectLikeCount" resultType="int">
+        select like_count from news where id=#{newsId}
+    </select>
 </mapper>

@@ -28,7 +28,7 @@
 
     <resultMap id="query" type="vos">
         <association property="news" javaType="news">
-            <result column="id" property="id"/>
+            <id column="id" property="id"/>
             <result column="title" property="title"/>
             <result column="link" property="link"/>
             <result column="image" property="image"/>
@@ -38,14 +38,19 @@
             <result column="comment_count" property="commentCount"/>
         </association>
         <association property="user" javaType="user">
-            <result column="id" property="id"/>
+            <id column="id" property="id"/>
             <result column="name" property="name"/>
             <result column="head_url" property="headUrl"/>
         </association>
     </resultMap>
 
     <select id="selectAllNews" resultMap="query">
-         select news.*,
+         select news.id,news.title,
+         news.link,news.image,
+         news.like_count,
+         news.comment_count,
+         news.created_date,
+         news.user_id,
            user.id,
            user.name,
            user.head_url
@@ -53,5 +58,8 @@
           FROM news LEFT JOIN user ON
        news.user_id = user.id
 
+    </select>
+    <select id="findUserByname" resultType="user">
+        select * from user where name=#{name}
     </select>
 </mapper>

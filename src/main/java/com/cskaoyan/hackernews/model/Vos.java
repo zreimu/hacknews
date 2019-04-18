@@ -3,6 +3,15 @@ package com.cskaoyan.hackernews.model;
 public class Vos {
     User user;
     News news;
+    int like;
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
+    }
 
     public User getUser() {
         return user;
@@ -25,6 +34,7 @@ public class Vos {
         return "Vos{" +
                 "user=" + user +
                 ", news=" + news +
+                ", like=" + like +
                 '}';
     }
 }

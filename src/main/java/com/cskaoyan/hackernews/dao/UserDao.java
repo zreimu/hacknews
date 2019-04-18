@@ -13,5 +13,7 @@ public interface UserDao {
     User selectUser(@Param("user")User user);
     int addNews(@Param("news") News news);
     List<Vos> selectAllNews();
+    User findUserByname(@Param("name") String toName);
     User selectUserinfoByid(@Param("id")String id);
+
 }

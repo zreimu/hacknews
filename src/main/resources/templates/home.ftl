@@ -21,12 +21,12 @@
             </#if>
                  <div class="post">
                     <div class="votebar">
-                        <#if  vo.news.likeCount gt 0 >
+                        <#if  vo.like gt 0 >
                         <button class="click-like up pressed" data-id="${vo.news.id!}" title="赞同"><i class="vote-arrow"></i><span class="count">${vo.news.likeCount!}</span></button>
                         <#else>
                         <button class="click-like up" data-id="${vo.news.id!}" title="赞同"><i class="vote-arrow"></i><span class="count">${vo.news.likeCount!}</span></button>
                         </#if>
-                        <#if vo.news.likeCount < 0>
+                        <#if vo.like lt 0>
                         <button class="click-dislike down pressed" data-id="${vo.news.id!}" title="反对"><i class="vote-arrow"></i></button>
                         <#else>
                         <button class="click-dislike down" data-id="${vo.news.id!}" title="反对"><i class="vote-arrow"></i></button>
