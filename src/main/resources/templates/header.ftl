@@ -2,7 +2,7 @@
 <html>
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <title>吃货头条 - 王道码农训练营</title>
+    <title>新闻分享</title>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
 
@@ -21,6 +21,7 @@
     <script type="text/javascript" src="${contextPath}/scripts/main/component/popupUpload.js"></script>
     <script type="text/javascript" src="${contextPath}/scripts/main/util/action.js"></script>
     <script type="text/javascript" src="${contextPath}/scripts/main/site/home.js"></script>
+    <script type="text/javascript" src="${contextPath}/scripts/main/component/userUpload.js"></script>
     <script type="text/javascript" src="${contextPath}/scripts/main/component/popupSendMsg.js"></script>
 
 </head>
@@ -37,22 +38,24 @@
             </button>
 
             <a href="${contextPath}" class="navbar-brand logo">
-                <h1>美食资讯</h1>
-                <h3>有好吃的才是王道</h3>
+                <h1>IT新闻资讯</h1>
+                <h3>程序人生</h3>
             </a>
-        </div>
 
+        </div>
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
 
             <ul class="nav navbar-nav navbar-right">
                 <#if user??>
-                <li class="js-share"><a href="javascript:void(0);">分享</a></li>
+                    <li class=""><a href="${contextPath}/luntan/">论坛</a></li>
+                <li class="js-share"><a href="javascript:void(0);">分享帖子</a></li>
                 <li class=""><a href="${contextPath}/msg/list">站内信</a></li>
                 <li class="top-nav-noti zu-top-nav-li ">
                     <a href="${contextPath}/user/tosendmsg">   发私信 </a>
                 </li>
-                <li class=""><a href="${contextPath}/user/${user.id!}/">${user.name!}</a></li>
+                <li class=""><a href="${contextPath}/user/${user.id!}/">${user.nickname!}</a></li>
                 <li class=""><a href="${contextPath}/logout/">注销</a></li>
+                    <li class=""><a href="${contextPath}/">返回首页</a></li>
                 <#else>
                 <li class="js-login"><a href="javascript:void(0);">登陆</a></li>
                 </#if>

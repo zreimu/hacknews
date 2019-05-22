@@ -15,7 +15,7 @@
                 <#assign  cur_date =vo.news.createdDate?string("yyyy-MM-dd")/>
             <h3 class="date">
                 <i class="fa icon-calendar"></i>
-                <span>美食资讯 &nbsp; ${vo.news.createdDate?string("yyyy-MM-dd")}</span>
+                <span>交流区 &nbsp; ${vo.news.createdDate?string("yyyy-MM-dd")}</span>
             </h3>
             <div class="posts">
             </#if>
@@ -56,7 +56,7 @@
 
                     </div>
 
-                    <div class="subject-name">来自 <a href="${contextPath!}/user/${vo.user.id}/">${vo.user.name}</a></div>
+                    <div class="subject-name">来自 <a href="${contextPath!}/user/${vo.user.id}/">${vo.user.nickname}</a></div>
                 </div>
 
 

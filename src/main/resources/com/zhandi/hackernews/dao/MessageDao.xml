@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhandi.hackernews.dao.MessageDao">
+
+
+
+    <select id="findAllMessage" resultMap="BaseMessage">
+        select * from message
+    </select>
+
+    <insert id="addMessage"  >
+        insert into message(from_id,to_id,content,created_date,has_read,conversation_id) values(#{id},#{toId},#{content},#{date},0,CONCAT(#{id},'_',#{toId}))
+    </insert>
+
+
+
+    <resultMap id="findUserMessageByUserId" type="com.zhandi.hackernews.model.MessageVo">
+        <association property="conversation" javaType="com.zhandi.hackernews.model.Conversation">
+            <id column="mid" property="id"></id>
+            <result column="from_id" property="fromId" ></result>
+            <result column="to_id" property="toId"></result>
+            <result column="content" property="content"></result>
+            <result column="created_date" property="createdDate"></result>
+            <result column="has_read" property="hasRead"></result>
+            <result column="conversation_id" property="conversationId"></result>
+        </association>
+        <association property="user" javaType="com.zhandi.hackernews.model.User">
+            <id column="id" property="id"></id>
+            <result column="name" property="name"></result>
+            <result column="password" property="password"></result>
+            <result column="salt" property="salt"></result>
+            <result column="head_url" property="headUrl"></result>
+        </association>
+    </resultMap>
+    
+    <select id="findUserMessageByUserId" resultMap="findUserMessageByUserId">
+        SELECT
+        count(message.id) as mid,
+        message.content ,
+        message.from_id,
+        message.to_id,
+        message.created_date ,
+        conversation_id ,
+        `user`.*
+        from
+        message, `user` 
+        where `user`.id=message.to_id 
+        and (message.from_id=#{id} or message.to_id=#{id}) GROUP BY message.conversation_id 
+    </select>
+
+
+    <resultMap id="Msg" type="com.zhandi.hackernews.model.Msg">
+        <association property="user" javaType="com.zhandi.hackernews.model.User">
+         <id column="uid" property="id"></id>
+         <result column="head_url" property="headUrl"></result>
+        </association>
+        <association property="message" resultMap="BaseMessage">
+        </association>
+    </resultMap>
+
+    <resultMap id="BaseMessage" type="com.zhandi.hackernews.model.Message" >
+        <id column="id" property="id"/>
+        <result column="from_id" property="fromId" ></result>
+        <result column="to_id" property="toId"></result>
+        <result column="content" property="content"></result>
+        <result column="created_date" property="createdDate"></result>
+        <result column="has_read" property="hasRead"></result>
+        <result column="conversation_id" property="conversationId"></result>
+    </resultMap>
+
+    <select id="findUserMessageByconversationId" resultMap="Msg">
+       select
+ `user`.id  uid,
+  `user`.head_url ,
+	message.id,
+	message.from_id,
+	message.to_id,
+	message.content,
+	message.created_date,
+	message.has_read,
+	message.conversation_id
+    from message ,`user` where `user`.id=message.from_id
+    and (conversation_id=#{conversationId} or conversation_id=#{conversationId2})
+
+    </select>
+
+</mapper>

@@ -25,7 +25,7 @@
                         <a target="_blank" rel="external nofollow" href="${news.link!}">${news.title!}</a>
                     </h3>
                     <div class="meta">
-                        <a target="_blank" rel="external nofollow" href="${news.link!}">${news.link!}</a>
+                       <p>${news.link!}</p>
                               <span>
                                   <i class="fa icon-comment"></i> ${news.commentCount!}
                               </span>
@@ -48,7 +48,7 @@
                 -->
             </div>
 
-            <div class="subject-name">来自 <a href="${contextPath}/user/${owner.id}">${owner.name!}</a></div>
+            <div class="subject-name">来自 <a href="${contextPath}/user/${owner.id}">${owner.nickname!}</a></div>
         </div>
 
 

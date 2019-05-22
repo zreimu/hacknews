@@ -9,8 +9,8 @@
             '<div class="wrapper-content clearfix">',
                 '<div class="input-section">',
                     '<div class="form-group">',
-                        '<label class="control-label">电子邮箱</label>',
-                        '<div class="control-group js-email"><input type="email" placeholder="请输入邮箱"></div>',
+                        '<label class="control-label">账号</label>',
+                        '<div class="control-group js-email"><input type="email" placeholder="请输入账号"></div>',
                     '</div>',
                     '<div class="form-group">',
                         '<label class="control-label">密码</label>',
@@ -61,7 +61,7 @@
                 }).done(function (oResult) {
                     if (oResult.code === 0) {
                        window.location.reload();
-                        that.emit('login');
+                        that.emit('login.ftl.ftl');
                     } else {
                         oResult.msgname && that.iptError(that.emailIpt, oResult.msgname);
                         oResult.msgpwd && that.iptError(that.pwdIpt, oResult.msgpwd);
